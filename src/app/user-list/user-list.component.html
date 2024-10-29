@@ -1,0 +1,11 @@
+<mat-card-header>
+  <h4>User List</h4>
+</mat-card-header>
+
+<mat-card-content class="user-container">
+  @for(user of userDataService.userData; track user.id) {
+  <app-user [user]="user"></app-user>
+  } @empty {
+  <p>There are no users.</p>
+  }
+</mat-card-content>
