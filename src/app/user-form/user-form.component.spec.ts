@@ -8,9 +8,8 @@ describe('UserFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserFormComponent]
-    })
-    .compileComponents();
+      imports: [UserFormComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UserFormComponent);
     component = fixture.componentInstance;
@@ -19,5 +18,15 @@ describe('UserFormComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should validate email format', () => {
+    const control = component.userForm.get('email');
+
+    control?.setValue('xyz');
+    expect(control?.valid).toBeFalsy();
+
+    control?.setValue('test@test.com');
+    expect(control?.valid).toBeTruthy();
   });
 });

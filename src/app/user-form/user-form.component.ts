@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -31,6 +31,9 @@ import { User } from '../model';
   styleUrl: './user-form.component.scss',
 })
 export class UserFormComponent {
+  addNew = signal(true);
+  id = signal<string | undefined>(undefined);
+
   userForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
@@ -42,8 +45,11 @@ export class UserFormComponent {
   constructor(private readonly userDataService: UserDataService) {}
 
   onSubmit() {
-    // add id
-    this.userDataService.addUser(this.mapUserData());
+    if (this.addNew()) {
+      this.userDataService.addUser(this.mapUserData());
+    } else {
+      this.userDataService.editUser(this.mapUserData());
+    }
   }
 
   private mapUserData() {
@@ -56,7 +62,7 @@ export class UserFormComponent {
         street,
         city,
       },
-      id: uuidv4(),
+      id: this.id() ?? uuidv4(),
     } as User;
   }
 }

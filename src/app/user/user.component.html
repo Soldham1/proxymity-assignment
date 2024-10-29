@@ -2,11 +2,11 @@
   <mat-card-content>
     <div>
       <span>{{ user().name }}</span>
-      <button mat-button>Edit</button>
+      <button mat-button (click)="editUser()">Edit</button>
       <button mat-button (click)="deleteUser()">Delete</button>
     </div>
     <p>Username: {{ user().username }}</p>
-    <p>Address: {{ user().address.street }}, {{ user().address.city }}</p>
+    <p>Address: {{ user().address?.street }}, {{ user().address?.city }}</p>
     <p>Email: {{ user().email }}</p>
   </mat-card-content>
 </mat-card>

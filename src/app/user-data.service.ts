@@ -16,4 +16,9 @@ export class UserDataService {
   deleteUser(userIdToDelete: string) {
     this.userData = this.userData.filter((user) => user.id !== userIdToDelete);
   }
+
+  editUser(user: User) {
+    this.deleteUser(user.id);
+    this.addUser(user);
+  }
 }

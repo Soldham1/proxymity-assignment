@@ -22,6 +22,5 @@ export class DashboardComponent {
 
   openUserForm() {
     this.dialog.open(UserFormComponent);
-    //this.userDataService.addUser({});
   }
 }
