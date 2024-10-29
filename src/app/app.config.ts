@@ -18,7 +18,7 @@ import { catchError, Observable, tap } from 'rxjs';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { UserDataService } from './user-data.service';
 import { User } from './model';
-import { AuthInterceptorService } from './interceptors/author-interceptor.service';
+import { AuthorInterceptorService } from './interceptors/author-interceptor.service';
 
 function initializeUserData(
   httpClient: HttpClient,
@@ -38,7 +38,7 @@ function initializeUserData(
 
 const authorInterceptorProvider: Provider = {
   provide: HTTP_INTERCEPTORS,
-  useClass: AuthInterceptorService,
+  useClass: AuthorInterceptorService,
   multi: true,
 };
 
