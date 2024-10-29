@@ -7,7 +7,7 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, tap } from 'rxjs';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { UserDataService } from './user-data.service';
 import { User } from './model';
@@ -15,9 +15,13 @@ import { User } from './model';
 function initializeUserData(
   httpClient: HttpClient,
   userDataService: UserDataService
-): () => Observable<any> {
+): () => Observable<User[]> {
   return () =>
     httpClient.get<User[]>('https://jsonplaceholder.typicode.com/users').pipe(
+      catchError((error) => {
+        console.error(error);
+        return [];
+      }),
       tap((data) => {
         userDataService.userData = data;
       })

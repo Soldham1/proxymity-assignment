@@ -1,11 +1,11 @@
 export type User = {
-  id: number;
+  id: string;
   email: string;
   name: string;
-  phone: string;
+  phone?: string;
   username: string;
-  website: string;
-  company: Company;
+  website?: string;
+  company?: Company;
   address: Address;
 };
 
@@ -18,9 +18,9 @@ export type Company = {
 export type Address = {
   city: string;
   street: string;
-  suite: string;
-  zipcode: string;
-  geo: {
+  suite?: string;
+  zipcode?: string;
+  geo?: {
     lat: string;
     lng: string;
   };
